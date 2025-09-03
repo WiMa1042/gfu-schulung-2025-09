@@ -6,7 +6,7 @@ abstract class Vehicle{
 
     protected int $maxNumberOfPersons;
 
-    protected string|null $manufacturer = null;
+    protected ManufacturerEnum|null $manufacturer = null;
     /**
      * @throws Exception
      */
@@ -14,7 +14,7 @@ abstract class Vehicle{
     {
         $className = get_class($this);
         if(null !== $this->getManufacturer()){
-            $className .= " vom Hersteller {$this->getManufacturer()}";
+            $className .= " vom Hersteller {$this->getManufacturer()->name}";
         }
         return "Das {$className} hat {$this->getNumberOfWheels()} Räder und ist für {$this->getMaxNumberOfPersons()} Personen geeignet.";
     }
@@ -53,14 +53,23 @@ abstract class Vehicle{
     }
 
 
-    public function getManufacturer(): ?string
+    public function getManufacturer(): ?ManufacturerEnum
     {
         return $this->manufacturer;
     }
 
-    public function setManufacturer(?string $manufacturer): self
+    public function setManufacturer(?ManufacturerEnum $manufacturer): self
     {
         $this->manufacturer = $manufacturer;
         return $this;
     }
+
+    static public function createVehicleFromManu(int $wheels)
+    {
+        $vehicle = new static();
+        $vehicle->setNumberOfWheels($wheels);
+
+    }
+
+
 }
