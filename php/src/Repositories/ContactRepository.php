@@ -30,11 +30,12 @@ class ContactRepository implements ContactsRepositoryInterface
         }, $contects);
     }
 
-    public function findById(int $id): array
+    public function findById(int $id): Contact
     {
-        //$stmt = 'SELECT * FROM contacts WHERE id = :id';
+
         // TODO: Implement findById() method.
-        return [];// $this->executeQurery($stmt);
+        return new Contact( 0,'','','','','','');// $this->executeQurery($stmt);
+
     }
 
     public function create(array $data): int
