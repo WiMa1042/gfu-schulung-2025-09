@@ -2,12 +2,9 @@
 
 declare(strict_types=1);
 
-$srcDir = realpath(__DIR__).'/src/';
+use App\Repositories\ContactRepository;
 
-require $srcDir . 'Interfaces/Repositories/ContactsRepositoryInterface.php';
-require $srcDir . 'Repositories/Traits/HasDatabaseConnection.php';
-require $srcDir . 'Repositories/ContactRepository.php';
-
+require_once realpath(__DIR__ ).'/src/autoloader.php';
 
 $dbConfig = require dirname(__DIR__.'/..') . '/config/database.php';
 

@@ -1,4 +1,11 @@
 <?php
+declare(strict_types=1);
+
+namespace App\Repositories;
+
+
+use App\Interfaces\Repositories\ContactsRepositoryInterface;
+use App\Repositories\Traits\HasDatabaseConnection;
 
 class ContactRepository implements ContactsRepositoryInterface
 {
