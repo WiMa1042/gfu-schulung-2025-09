@@ -7,3 +7,5 @@
 /favicon.ico
 /index.php
 /.idea
+/php/node_modules/
+/php/package-lock.json

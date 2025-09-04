@@ -7,6 +7,7 @@ global $contacts;
     <title>Liste von Kontakten</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
 </head>
 <body>
     <header>
@@ -21,18 +22,28 @@ global $contacts;
                 <tr>
                     <th>Name</th>
                     <th>E-mail</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($contacts as $contact): ?>
                     <?php /** @var \App\Models\Contact $contact */ ?>
                     <tr>
-                        <td><?php echo htmlspecialchars("{$contact ->getFirstname()} {$contact->getLastname()}")?></td>
+                        <td><?php echo htmlspecialchars($contact->getName())?></td>
                         <td><?php echo htmlspecialchars($contact->getEmail())?></td>
+                        <td class="actions">
+                            <a href="edit.php?id=<?php echo $contact->getId() ?>"
+                               class="btn btn-primary"><i class="fas fa-edit"></i>Bearbeiten</a>
+                            <a href="delete.php?id=<?php echo $contact->getId() ?>"
+                               class="btn btn-danger"><i class="fas fa-trash"></i> Löschen</a>
+                        </td>
                     </tr>
                 <?php endforeach;?>
             </tbody>
         </table>
+        <div class="actions">
+            <a href="create.php" class="btn btn-primary"><i class="fas fa-plus"></i> Neuen Kontakt erstellen</a>
+        </div>
     </main>
     <footer>
         <p>&copy; Max Wild</p>
