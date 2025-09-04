@@ -1,37 +1,27 @@
 <?php
+
 declare(strict_types=1);
-include_once 'src/ManufacturerEnum.php';
-include_once 'src/Vehicle.php';
-include_once 'src/Car.php';
-include_once 'src/Bicycle.php';
-include_once 'src/Trike.php';
+
+$srcDir = realpath(__DIR__).'/src/';
+
+require $srcDir . 'Interfaces/Repositories/ContactsRepositoryInterface.php';
+require $srcDir . 'Repositories/Traits/HasDatabaseConnection.php';
+require $srcDir . 'Repositories/ContactRepository.php';
 
 
-$car = new Car();
-$bicycle = new Bicycle();
-$trike = new Trike();
+$dbConfig = require dirname(__DIR__.'/..') . '/config/database.php';
 
-$audi = (new Car())
-    ->setManufacturer(ManufacturerEnum::Audi);
+$contectRepository = new ContactRepository();
+$contectRepository->connection(
+    $dbConfig['host'],
+    $dbConfig['port'],
+    $dbConfig['username'],
+    $dbConfig['password'],
+    $dbConfig['database'],
+);
 
-$smart = (new Car())->setManufacturer(ManufacturerEnum::Smart)
-    ->setMaxNumberOfPersons(2)
-    ->setNumberOfDoors(3);
+$contacts = $contectRepository->findAll();
 
-$bmw = (new Car())->setManufacturer(ManufacturerEnum::BMW)
-    ->setMaxNumberOfPersons(4)
-    ->setNumberOfDoors(3);
-
-
-
-
-echo $audi . "<br />";
-echo $smart . "<br />";
-echo $bmw . "<br />";
-echo $car . "<br />";
-echo $bicycle . "<br />";
-echo $trike . "<br />";
-
-
-
-
+echo '<pre>'; print_r($dbConfig).'</pre>';
+//echo '<pre>'; print_r($res).'</pre>';
+echo  '<pre>'; print_r($contacts).'</pre>';
