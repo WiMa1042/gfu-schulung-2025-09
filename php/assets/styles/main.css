@@ -1,0 +1,84 @@
+:root{
+    --color-background: #fafafa;
+    --color-background-second: #2c3e50 ;
+    --color-text: #333333;
+    --color-text-second: #ffffff;
+    --color-table-header: #06456f;
+    --color-table-header-text: #ffffff ;
+    --color-table-row-primery: #f9f9f9;
+    --color-table-row-secondary: #535353;
+    --color-table-row-primery-text: #000000;
+    --color-table-row-secondary-text: #ffffff;
+    --color-table-border: #333333;
+
+}
+
+
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+header,
+footer {
+    background-color: var(--color-background-second);
+    color: var(--color-text-second);
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1{
+    margin-bottom: 1.5rem;
+}
+nav a{
+    color: var(--color-text-second);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: bold;
+}
+
+nav a:hover{
+    text-decoration: underline;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0 ,0.1);
+}
+
+main table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    border: var(--color-table-border);
+}
+main table thead{
+    background-color: var(--color-table-header);
+    color: var(--color-table-header-text);
+
+}
+main table tbody tr:nth-child(){
+    background-color: var(--color-table-row-primery);
+    color: var(--color-table-row-primery-text);
+}
+main table tbody tr:nth-child(even){
+    background-color: var(--color-table-row-secondary);
+    color: var(--color-table-row-secondary-text);
+}
+main table tbody tr:hover{
+    background-color: var(--color-table-header);
+    color: var(--color-table-header-text);
+}
+
+footer p{
+    font-size: 0.8rem;
+}
+

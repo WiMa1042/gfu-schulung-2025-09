@@ -19,6 +19,9 @@ $contectRepository->connection(
 
 $contacts = $contectRepository->findAll();
 
-echo '<pre>'; print_r($dbConfig).'</pre>';
-//echo '<pre>'; print_r($res).'</pre>';
-echo  '<pre>'; print_r($contacts).'</pre>';
+include __DIR__.'\templates\contacts\index.phtml';
+
+
+// echo '<pre>'; print_r($dbConfig).'</pre>';
+// echo '<pre>'; print_r($res).'</pre>';
+// echo  '<pre>'; print_r($contacts).'</pre>';
