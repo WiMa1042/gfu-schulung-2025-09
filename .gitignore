@@ -9,3 +9,5 @@
 /.idea
 /php/node_modules/
 /php/package-lock.json
+/php/vendor/
+/php/composer.lock

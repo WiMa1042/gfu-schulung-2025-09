@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 include realpath(__DIR__ ). '/functions.php';
+include realpath(__DIR__.'/..' ). '/vendor/autoload.php';
 
 spl_autoload_register(function (string $className) {
     $prefix = 'App\\';

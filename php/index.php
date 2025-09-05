@@ -7,15 +7,24 @@ use App\DTOs\ConteactDTO;
 use App\Enums\ContactActionEnum;
 use App\Enums\FlashMessageEnum;
 use App\Repositories\ContactRepository;
+use DI\Container;
+use DI\ContainerBuilder;
 
 require_once realpath(__DIR__ ).'/src/autoloader.php';
 
 session_start();
 
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->addDefinitions(require realpath(__DIR__).'/config/di.php');
+$container = $containerBuilder->build();
 
 $dbConfig = require dirname(__DIR__.'/..') . '/config/database.php';
 
+/** @var ContactRepository $contectRepository */
+$contactRepository = $container->get(ContactRepository::class);
+
 $contectRepository = new ContactRepository();
+
 $contectRepository->connection(
     $dbConfig['host'],
     $dbConfig['port'],
