@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title><?php echo $title?></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="assets/scripts/main.js"></script>
+</head>
+<body>
+<header>
+    <h1><?php echo $title?></h1>
+    <nav>
+        <a href="index.php">Home</a>
+    </nav>
+</header>
+<main>
+    <?php if (! empty($flash)): ?>
+        <div class="flash flash-<?php echo htmlspecialchars($flash['type']) ?>">
+            <?php echo htmlspecialchars($flash['message']) ?>
+        </div>
+    <?php endif; ?>
+    <?php echo $content ?? ''; ?>
+</main>
+<footer>
+    <p>&copy; Max Wild</p>
+</footer>
+</body>
+</html>

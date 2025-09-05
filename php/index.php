@@ -3,10 +3,15 @@
 declare(strict_types=1);
 
 
+use App\DTOs\ConteactDTO;
 use App\Enums\ContactActionEnum;
+use App\Enums\FlashMessageEnum;
 use App\Repositories\ContactRepository;
 
 require_once realpath(__DIR__ ).'/src/autoloader.php';
+
+session_start();
+
 
 $dbConfig = require dirname(__DIR__.'/..') . '/config/database.php';
 
@@ -26,21 +31,82 @@ $requestedAction = filter_has_var(INPUT_GET, 'action')
 $action = ContactActionEnum::tryFrom($requestedAction) ?? ContactActionEnum::List;
 
 
+
 switch ($action) {
     case ContactActionEnum::List:
         $contacts = $contectRepository->findAll();
-include __DIR__.'\templates\contacts\index.phtml';
-break;
-case ContactActionEnum::Edit:
+        render('contacts/list',  [
+            'title' => 'Kontakte',
+            'contacts' => $contacts,
+            ]);
+    break;
+    case ContactActionEnum::Edit:
+        //echo '<pre>'; print_r($_SESSION).'</pre>';
         $id = filter_input(INPUT_GET, 'id',FILTER_VALIDATE_INT);
         if (false === $id || null === $id) {
             redirect();
         }
         $contect = $contectRepository->findById($id);
-        echo '<pre>'; print_r($contect).'</pre>';
+
+        render('contacts/form', [
+            'title' => "Kontakt bearbeiten <em>{$contect->getName()}</em>",
+            'contact' => $contect,
+            'errors' => $_SESSION['errors'] ?? [],
+        ]);
+        unset($_SESSION['errors']);
+        //echo '<pre>'; print_r($contect).'</pre>';
         break;
-    default:
-        // do nothing
+    case ContactActionEnum::Save:
+
+       $dto = ConteactDTO::fromPost();
+       $res = $dto->validate();
+
+        if(is_array($res) && ! empty($res)) {
+            $_SESSION['errors'] = $res;
+            $_SESSION['dto'] = $dto;
+            $action = $dto->hasId() ? ContactActionEnum::Edit : ContactActionEnum::Create;
+
+            $url = 'index.php?action='. $action->value;
+            if ($dto->hasId()) {
+                $url .= '&id='.$dto->getId();
+            }
+            $dto->asOld();
+            redirect($url);
+        }
+
+        if ($dto->hasId()) {
+            $res = $contectRepository->update($dto->getId(), $dto);
+            setFlash(FlashMessageEnum::Success, 'Der Kontakt wurde erfolgreich aktualisiert.');
+        } else {
+            $newId = $contectRepository->create($dto);
+            if (0 < $newId) {
+                setFlash(FlashMessageEnum::Success, 'Der Kontakt wurde erfolgreich angelegt.');
+                $res = true;
+            }
+        }
+        redirect();
+        break;
+    case ContactActionEnum::Create:
+
+        render('contacts/form', [
+            'title' => 'Neuen Kontakt anlegen',
+            'errors' => $_SESSION['errors'] ?? [],
+        ]);
+
+        unset($_SESSION['errors']);
+    break;
+    case ContactActionEnum::Delete:
+
+        $id = filter_input(INPUT_GET, 'id',FILTER_VALIDATE_INT);
+        if (false !== $id && null !== $id) {
+            $contectRepository->delete($id);
+            setFlash(FlashMessageEnum::Success, 'Der Kontakt wurde gelöscht.');
+        }
+        else{
+            setFlash(FlashMessageEnum::Error, 'Der Kontakt konnte nicht gelöscht werden.');
+        }
+
+        redirect();
         break;
 }
 

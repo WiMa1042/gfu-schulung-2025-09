@@ -6,7 +6,7 @@ namespace App\Models;
 class Contact
 {
     public function __construct(
-        private readonly int $id,
+        private readonly int|null $id = null,
         private string $firstname,
         private string $lastname,
         private string $title,
@@ -15,7 +15,7 @@ class Contact
         private string $about,
     ){  }
 
-    public function getId(): int
+    public function getId(): int|null
     {
         return $this->id;
     }

@@ -1,20 +1,9 @@
-:root{
-    --color-background: #fafafa;
-    --color-background-second: #2c3e50 ;
-    --color-text: #333333;
-    --color-text-second: #ffffff;
-    --color-table-header: #06456f;
-    --color-table-header-text: #ffffff ;
-    --color-table-row-primery: #f9f9f9;
-    --color-table-row-secondary: #535353;
-    --color-table-row-primery-text: #000000;
-    --color-table-row-secondary-text: #ffffff;
-    --color-table-border: #333333;
-    --color-btn-primary: #3498db;
-    --color-btn-primary-hover: #2980b9;
-    --color-btn-danger: #e74c3c;
-    --color-btn-danger-hover: #c0392b;
-}
+
+@import 'variables.css';
+@import 'form.css';
+@import 'buttons.css';
+@import 'flash.css  ';
+
 
 
 body{
@@ -61,12 +50,10 @@ main table{
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 2rem;
-    border: var(--color-table-border);
 }
 main table thead{
     background-color: var(--color-table-header);
     color: var(--color-table-header-text);
-
 }
 main table tbody tr:nth-child(){
     background-color: var(--color-table-row-primery);
@@ -85,34 +72,11 @@ table td.actions {
     white-space: nowrap;
     width: 1rem;
 }
+
+
 div.actions{
     text-align: right;
     margin-bottom: 2rem;
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: .25rem;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.btn-primary{
-    background-color: var(--color-btn-primary);
-    color: white;
-}
-.btn-danger{
-    background-color: var(--color-btn-danger);
-    color: white;
-}
-.btn-primary:hover{
-    background-color: var(--color-btn-primary-hover);
-}
-.btn-danger:hover{
-    background-color: var(--color-btn-danger-hover);
 }
 
 

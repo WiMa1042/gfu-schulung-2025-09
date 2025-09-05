@@ -1,0 +1,29 @@
+input,
+textarea{
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--color-table-border);
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+
+}
+
+textarea{
+    resize: vertical;
+    min-height: 5rem;
+}
+main table{
+
+    border: 3px solid var(--color-table-border);
+}
+
+table td.first-colunm {
+    width: 20%;
+}
+
+table.edit td input + .error,
+table.edit td textarea + .error{
+    display: inline-block;
+    color: var(--color-danger);
+    font-size: 0.8rem;
+}
